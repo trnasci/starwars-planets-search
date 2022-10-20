@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect} from 'react';
+import React, { createContext, useState, useEffect, useMemo } from 'react';
 import PropTypes from 'prop-types';
 
 export const TableContext = createContext();
@@ -18,9 +18,9 @@ function Provider({ children }) {
     requestAPI();
   }, []);
 
-  const contextValue = {
+  const contextValue = useMemo(() => ({
     planetList,
-  };
+  }), [planetList]);
 
   return (
     <TableContext.Provider value={ contextValue }>
@@ -30,7 +30,7 @@ function Provider({ children }) {
 }
 
 Provider.propTypes = {
-  children: PropTypes.required,
-}
+  children: PropTypes.node,
+}.isRequired;
 
 export default Provider;
