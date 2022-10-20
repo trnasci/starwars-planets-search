@@ -5,6 +5,7 @@ export const TableContext = createContext();
 
 function Provider({ children }) {
   const [planetList, setPlanetList] = useState([]);
+  const [nameFilter, setNameFilter] = useState('');
 
   const requestAPI = async () => {
     const endpoint = 'https://swapi.dev/api/planets';
@@ -18,9 +19,16 @@ function Provider({ children }) {
     requestAPI();
   }, []);
 
+  const handleChangeName = (event) => {
+    const { value } = event.target;
+    setNameFilter(value);
+  };
+
   const contextValue = useMemo(() => ({
     planetList,
-  }), [planetList]);
+    nameFilter,
+    handleChangeName,
+  }), [planetList, nameFilter]);
 
   return (
     <TableContext.Provider value={ contextValue }>
