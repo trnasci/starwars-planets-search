@@ -4,7 +4,8 @@ import { TableContext } from '../context/TableContext';
 function Table() {
   const { planetList, nameFilter } = useContext(TableContext);
   const planetListTable = planetList
-    .filter((element) => element.name.toLowerCase().includes(nameFilter.toLowerCase()));
+    .filter((element) => element.name.toLowerCase().includes(nameFilter.toLowerCase()))
+    .filter((element) => element.surface_water === '1');
   return (
     <table>
       <thead>
