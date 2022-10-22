@@ -2,7 +2,11 @@ import React, { useState, useContext } from 'react';
 import { TableContext } from '../context/TableContext';
 
 function NumberFilter() {
-  const { handleChangeColumnFilter, optionColumn } = useContext(TableContext);
+  const { handleChangeColumnFilter,
+    optionColumn,
+    columnFilter,
+    handleOptionColumn,
+    handleClearFilters } = useContext(TableContext);
   const [stateColumnFilter, setStateColumnFilter] = useState({
     columnfilter: 'population',
     comparisonfilter: 'maior que',
@@ -21,7 +25,7 @@ function NumberFilter() {
         value={ stateColumnFilter.columnfilter }
         onChange={ handleChange }
       >
-        {optionColumn.map((e) => <option key={ e }>{e}</option>)}
+        {optionColumn.map((e) => <option key={ Math.random() }>{e}</option>)}
       </select>
       <select
         data-testid="comparison-filter"
@@ -52,6 +56,29 @@ function NumberFilter() {
         ) }
       >
         Filtrar
+      </button>
+      {columnFilter.map((e) => (
+        <span
+          data-testid="filter"
+          key={ e.columnfilter }
+        >
+          {e.columnfilter}
+          {e.comparisonfilter}
+          {e.valuefilter}
+          <button
+            type="button"
+            name={ e.columnfilter }
+            onClick={ () => handleOptionColumn(e.columnfilter) }
+          >
+            excluir
+          </button>
+        </span>))}
+      <button
+        type="button"
+        data-testid="button-remove-filters"
+        onClick={ () => handleClearFilters() }
+      >
+        Remover todas filtragens
       </button>
     </div>
   );

@@ -35,9 +35,19 @@ function Provider({ children }) {
     setOptionColumn((oldState) => (oldState.filter((e) => e !== option)));
   };
 
-  const handleOptionColumn = (event) => {
-    const { name } = event.target;
-    setOptionColumn(name);
+  const handleOptionColumn = (option) => {
+    setOptionColumn((oldState) => ([option, ...oldState]));
+    setColumnFilter((oldState) => (oldState.filter((e) => e.columnfilter !== option)));
+  };
+
+  const handleClearFilters = () => {
+    setOptionColumn([
+      'population',
+      'orbital_period',
+      'diameter',
+      'rotation_period',
+      'surface_water']);
+    setColumnFilter([]);
   };
 
   const contextValue = useMemo(() => ({
@@ -48,6 +58,7 @@ function Provider({ children }) {
     handleChangeName,
     handleChangeColumnFilter,
     handleOptionColumn,
+    handleClearFilters,
   }), [planetList, nameFilter, columnFilter, optionColumn]);
 
   return (
