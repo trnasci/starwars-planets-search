@@ -7,6 +7,11 @@ function Provider({ children }) {
   const [planetList, setPlanetList] = useState([]);
   const [nameFilter, setNameFilter] = useState('');
   const [columnFilter, setColumnFilter] = useState([]);
+  const [optionColumn, setOptionColumn] = useState(['population',
+    'orbital_period',
+    'diameter',
+    'rotation_period',
+    'surface_water']);
 
   const requestAPI = async () => {
     const endpoint = 'https://swapi.dev/api/planets';
@@ -25,17 +30,25 @@ function Provider({ children }) {
     setNameFilter(value);
   };
 
-  const handleChangeColumnFilter = (value) => {
+  const handleChangeColumnFilter = (value, option) => {
     setColumnFilter((oldState) => ([...oldState, value]));
+    setOptionColumn((oldState) => (oldState.filter((e) => e !== option)));
+  };
+
+  const handleOptionColumn = (event) => {
+    const { name } = event.target;
+    setOptionColumn(name);
   };
 
   const contextValue = useMemo(() => ({
     planetList,
     nameFilter,
     columnFilter,
+    optionColumn,
     handleChangeName,
     handleChangeColumnFilter,
-  }), [planetList, nameFilter, columnFilter]);
+    handleOptionColumn,
+  }), [planetList, nameFilter, columnFilter, optionColumn]);
 
   return (
     <TableContext.Provider value={ contextValue }>

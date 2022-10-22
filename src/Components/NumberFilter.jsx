@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import { TableContext } from '../context/TableContext';
 
 function NumberFilter() {
-  const { handleChangeColumnFilter } = useContext(TableContext);
+  const { handleChangeColumnFilter, optionColumn } = useContext(TableContext);
   const [stateColumnFilter, setStateColumnFilter] = useState({
     columnfilter: 'population',
     comparisonfilter: 'maior que',
@@ -21,11 +21,7 @@ function NumberFilter() {
         value={ stateColumnFilter.columnfilter }
         onChange={ handleChange }
       >
-        <option>population</option>
-        <option>orbital_period</option>
-        <option>diameter</option>
-        <option>rotation_period</option>
-        <option>surface_water</option>
+        {optionColumn.map((e) => <option key={ e }>{e}</option>)}
       </select>
       <select
         data-testid="comparison-filter"
@@ -50,7 +46,10 @@ function NumberFilter() {
       <button
         type="button"
         data-testid="button-filter"
-        onClick={ () => handleChangeColumnFilter(stateColumnFilter) }
+        onClick={ () => handleChangeColumnFilter(
+          stateColumnFilter,
+          stateColumnFilter.columnfilter,
+        ) }
       >
         Filtrar
       </button>
