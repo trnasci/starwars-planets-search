@@ -53,6 +53,9 @@ function NumberFilter() {
         onClick={ () => handleChangeColumnFilter(
           stateColumnFilter,
           stateColumnFilter.columnfilter,
+          setStateColumnFilter(
+            (oldState) => ({ ...oldState, columnfilter: 'population' }),
+          ),
         ) }
       >
         Filtrar
