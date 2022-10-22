@@ -6,7 +6,7 @@ export const TableContext = createContext();
 function Provider({ children }) {
   const [planetList, setPlanetList] = useState([]);
   const [nameFilter, setNameFilter] = useState('');
-  const [columnFilter, setColumnFilter] = useState({});
+  const [columnFilter, setColumnFilter] = useState([]);
 
   const requestAPI = async () => {
     const endpoint = 'https://swapi.dev/api/planets';
@@ -26,7 +26,7 @@ function Provider({ children }) {
   };
 
   const handleChangeColumnFilter = (value) => {
-    setColumnFilter(value);
+    setColumnFilter((oldState) => ([...oldState, value]));
   };
 
   const contextValue = useMemo(() => ({

@@ -5,8 +5,8 @@ function NumberFilter() {
   const { handleChangeColumnFilter } = useContext(TableContext);
   const [stateColumnFilter, setStateColumnFilter] = useState({
     columnfilter: 'population',
-    comparisonfilter: '',
-    valuefilter: '',
+    comparisonfilter: 'maior que',
+    valuefilter: '0',
   });
 
   const handleChange = (event) => {
