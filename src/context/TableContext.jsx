@@ -7,7 +7,8 @@ function Provider({ children }) {
   const [planetList, setPlanetList] = useState([]);
   const [nameFilter, setNameFilter] = useState('');
   const [columnFilter, setColumnFilter] = useState([]);
-  const [optionColumn, setOptionColumn] = useState(['population',
+  const [optionColumn, setOptionColumn] = useState([
+    'population',
     'orbital_period',
     'diameter',
     'rotation_period',

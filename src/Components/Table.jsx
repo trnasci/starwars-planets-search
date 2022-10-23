@@ -76,14 +76,14 @@ function Table() {
         default:
           return Number(el[filter1]) === Number(number1);
         }
-      }).filter((el) => {
+      }).filter((e) => {
         switch (valuecomparison2) {
         case 'maior que':
-          return Number(el[filter2]) > Number(number2);
+          return Number(e[filter2]) > Number(number2);
         case 'menor que':
-          return Number(el[filter2]) < Number(number2);
+          return Number(e[filter2]) < Number(number2);
         default:
-          return Number(el[filter2]) === Number(number2);
+          return Number(e[filter2]) === Number(number2);
         }
       });
   } else {

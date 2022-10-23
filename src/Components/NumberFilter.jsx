@@ -37,7 +37,7 @@ function NumberFilter() {
         <option>menor que</option>
         <option>igual a</option>
       </select>
-      <label htmlFor="name-filter">
+      <label htmlFor="value-filter">
         <input
           type="number"
           name="valuefilter"
